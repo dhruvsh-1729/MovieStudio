@@ -1,0 +1,42 @@
+
+.moviecard{
+    display:flex;
+    flex-direction: row;
+}
+
+.img{
+    border-radius:2rem;
+    cursor:pointer;
+    transition:1s all ease;
+}
+
+.img:hover{
+    transform:scale(1.05);
+}
+
+.title{ 
+    margin:1rem auto;
+    padding:1rem 1rem 1rem 1rem;
+    text-align: center;
+    font-size:2rem;
+    transition:1s all ease;
+}
+
+.title:hover{
+    transform:scale(1.05);
+}
+
+.text{
+    margin:1rem auto;
+    padding:1rem 2rem 1rem 2rem;
+    text-align: center;
+    transition: 1s all ease;
+}
+
+.text:hover{
+    transform:scale(1.05);
+}
+
+.moviecard ul{
+    padding:1rem 1rem 1rem 1rem;
+}

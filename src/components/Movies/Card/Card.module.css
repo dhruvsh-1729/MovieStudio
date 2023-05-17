@@ -1,0 +1,9 @@
+.main{
+    display:flex;
+    margin:1rem 1rem 1rem 1rem;
+    transition:1s all ease;
+}
+
+.main:hover{
+    transform: scale(1.05);
+}
