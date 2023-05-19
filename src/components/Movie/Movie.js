@@ -19,11 +19,12 @@ const Movie = () => {
         <div className="card-body">
           <h5 className={styles.title}>{my_movie.title}</h5>
           <p className={styles.text}>{my_movie.overview}</p>
-          <ul class="list-group">
-            <li class="list-group-item">{`Release Date : ${my_movie.release_date}`}</li>
-            <li class="list-group-item">{`Original language : ${my_movie.original_language}`}</li>
-            <li class="list-group-item">{`Vote count : ${my_movie.vote_count}`}</li>
+          <ul className="list-group">
+            <li className="list-group-item">{`Release Date : ${my_movie.release_date}`}</li>
+            <li className="list-group-item">{`Original language : ${my_movie.original_language}`}</li>
+            <li className="list-group-item">{`Vote count : ${my_movie.vote_count}`}</li>
           </ul>
+          <h1 className={styles.vote}>{my_movie.vote_average}</h1>
         </div>
       </div>
     </div>

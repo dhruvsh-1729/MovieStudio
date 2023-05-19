@@ -1,14 +1,11 @@
-const http = require('http');
-const PORT = 3000;
-const hostname = 'localhost';
+const http = require("http");
+const app = require("./app");
+const server = http.createServer(app);
 
-const server = http.createServer((req,res)=>{
-    res.send('Hello nodejs');
-    res.end();
-})
+const { API_PORT } = process.env;
+const port = process.env.PORT || API_PORT;
 
-server.listen(PORT, hostname, ()=>{
-    console.log(
-        `Server is listening at port ${PORT}`
-    )
-})
+// server listening 
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
