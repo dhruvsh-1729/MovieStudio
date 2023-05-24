@@ -75,7 +75,8 @@ app.post('/login',async (req,res)=>{
         const {email,password} = req.body;
 
         if(!(email && password)) res.json({
-            message : "All input is required, please fill all the fields with correct values"
+            message : "All input is required, please fill all the fields with correct values",
+            isLoggedIn:false
         })
 
         const user = await User.findOne({email:email.toLowerCase()})
@@ -107,6 +108,40 @@ const auth = require("./middleware/auth");
 app.post("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });
+
+//liking/disliking a particular movie
+app.post('/likes',async (req,res)=>{
+  try{
+  const {email,id} = req.body;
+  
+  const user = await User.findOne({email})
+  if(user){
+    const likesIndex = user.likes.indexOf(id);
+
+    if (likesIndex === -1) {
+      // If the movie ID is not already in the array, add it
+      user.likes.push(id);
+      await user.save();
+      return res.status(201).json({message:"Liked the movie!",user})
+    } else {
+      // If the movie ID is already in the array, remove it (dislike)
+      user.likes.splice(likesIndex, 1);
+      await user.save();
+      return res.status(201).json({message:"Disliked the movie!",user})
+    }
+  
+  
+  }
+  else{
+    res.status(500).json({message:"Internal server error, sorry for the inconvinience"})
+  }
+  }
+  catch(err){
+    res.status(500).json({message:"Could not like the movie, try again later"})
+  }
+  
+})
+
 
 
 module.exports = app;

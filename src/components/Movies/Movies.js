@@ -3,11 +3,14 @@ import {Link} from 'react-router-dom'
 import Card from './Card/Card'
 import styles from './Movies.module.css'
 import MoviesContext from '../../context/MovieContext'
+import UserContext from '../../context/UserContext'
 
 const About = () => {
 
   const {movies,setMovies} = useContext(MoviesContext);
+  const {loggedUser} = useContext(UserContext)
   console.log(movies);
+  
 
   return (
     <div className='row'>

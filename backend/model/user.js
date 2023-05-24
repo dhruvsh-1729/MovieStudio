@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
   zip:{type:String},
   checkout:{type:Boolean},
   token: { type: String },
+  likes: [Number]
 },
 );
 

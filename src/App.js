@@ -11,6 +11,7 @@ import {
 import Movies from './components/Movies/Movies'
 import Movie from './components/Movie/Movie';
 import MoviesContext from './context/MovieContext';
+import UserContext from './context/UserContext';
 import Signup from './components/Signup/Signup';
 import PreLoader from './components/PreLoader/PreLoader';
 
@@ -18,10 +19,12 @@ function App() {
   const API_KEY = "api_key=6e16a5d151e300aff30ce69dfc770cef";
   const BASE_URL = "https://api.themoviedb.org/3";
   const API_URL = BASE_URL + "/discover/movie?primary_release_date.gte=2021-09-15&primary_release_date.lte=2022-10-22&" + API_KEY;
-  const [movies, setMovies] = useState([])
+
   const SEARCH_URL = BASE_URL + '/search/movie?' + API_KEY;
 
   const [home, setHome] = useState(false);
+  const [loggedUser, setLoggedUser] = useState({})
+  const [movies, setMovies] = useState([])
 
   const getMovies = async () => {
     const res = await fetch(API_URL);
@@ -38,24 +41,26 @@ function App() {
 
   return (
     <div>
-      <MoviesContext.Provider value={{ movies, setMovies }}>
-        {!home && <PreLoader />}
-        {home &&
-          <Router>
+      <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
+        <MoviesContext.Provider value={{ movies, setMovies }}>
+          {!home && <PreLoader />}
+          {home &&
+            <Router>
 
-            <Navbar />
+              <Navbar />
 
-            <Routes>
-            <Route exact path="/" element={<Movies />} />
-              <Route exact path="/login" element={<Form />} />
-              <Route exact path="/movie/:id" element={<Movie />} />
-              <Route exact path="/signup" element={<Signup />} />
+              <Routes>
+                <Route exact path="/" element={<Movies />} />
+                <Route exact path="/login" element={<Form />} />
+                <Route exact path="/movie/:id" element={<Movie />} />
+                <Route exact path="/signup" element={<Signup />} />
 
-            </Routes>
+              </Routes>
 
-          </Router>
-        }
-      </MoviesContext.Provider>
+            </Router>
+          }
+        </MoviesContext.Provider>
+      </UserContext.Provider>
     </div>
   );
 }
